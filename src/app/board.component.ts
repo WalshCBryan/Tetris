@@ -17,7 +17,6 @@ import {
   } from '../constants';
   import { Piece, IPiece } from './piece.component';
   import { GameService } from './game.service';
-  import { Play } from 'node_modules/sound-play';
   
   @Component({
     selector: 'game-board',
@@ -115,17 +114,19 @@ import {
       console.table(this.board)
     }
 
+    //This needs work, unable to navigate to Tetris.mp3. Unsure if not supported or navigation is off 
     playmusic(){
       var isPlaying;
-      var sound = new Audio("Tetris.mp3");
+      var sound = new Audio("./assets/Tetris.mp3");
         if (!isPlaying) {
             sound.play();
+            isPlaying = true;
             console.log('play');
         } else {
-          sound.pause();
+            sound.pause();
+            isPlaying = false;
             console.log('pause');
         }
-
     }
   
     resetGame() {
