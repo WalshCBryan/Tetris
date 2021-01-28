@@ -44,6 +44,9 @@ import {
       [KEY.SPACE]: (p: IPiece): IPiece => ({ ...p, y: p.y + 1 }),
       [KEY.UP]: (p: IPiece): IPiece => this.service.rotate(p)
     };
+    isPlaying: boolean;
+    sound = new Audio("./assets/Tetris.mp3");
+
   
     @HostListener('window:keydown', ['$event'])
     keyEvent(event: KeyboardEvent) {
@@ -114,21 +117,32 @@ import {
       console.table(this.board)
     }
 
-    //This needs work, unable to navigate to Tetris.mp3. Unsure if not supported or navigation is off 
-    playmusic(){
-      var isPlaying;
-      var sound = new Audio("./assets/Tetris.mp3");
-        if (!isPlaying) {
-            sound.play();
-            isPlaying = true;
-            console.log('play');
-        } else {
-            sound.pause();
-            isPlaying = false;
-            console.log('pause');
-        }
-    }
+    // // This needs work, unable to navigate to Tetris.mp3. Unsure if not supported or navigation is off 
+    // playmusic(){
+    //   // var sound = new Audio("./assets/Tetris.mp3");
+    //     if (!isPlaying) {
+    //         // sound.play();
+    //         isPlaying = true;
+    //         console.log('play');
+    //     } else {
+    //         // sound.pause();
+    //         isPlaying = false;
+    //         console.log('pause');
+    //     }
+    // }
   
+    playmusic() {
+      if (!this.isPlaying) {
+      this.isPlaying = true;
+      this.sound.play();
+      console.log('playing');
+      } else {
+      this.isPlaying = false;
+      this.sound.pause();
+      console.log('pause');
+      }
+  }
+
     resetGame() {
       this.points = 0;
       this.lines = 0;
